@@ -39,7 +39,7 @@ public class MutualFriends {
 
         public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
             Set<String> set1 = new HashSet<>(Arrays.asList(values.iterator().next().toString().split(",")));
-            if (values.iterator().hasNext()) {
+            if (values.iterator().hasNext() && !user.equals(friend)) {
                 Set<String> set2 = new HashSet<>(Arrays.asList(values.iterator().next().toString().split(",")));
                 set1.retainAll(set2);
                 mutualFriends.set(String.join(",", set1));
